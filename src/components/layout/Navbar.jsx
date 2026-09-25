@@ -85,11 +85,11 @@ export const Navbar = () => {
           {/* Desktop Nav Links */}
           <nav className="hidden md:flex items-center gap-8" aria-label="Main Navigation">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.label}
-                href={link.href}
+                to={link.href}
                 onClick={(e) => {
-                  if (link.href.startsWith('/tournament#')) {
+                  if (link.href.startsWith('/tournament#') && location.pathname === '/tournament') {
                     e.preventDefault();
                     handleNavClick(link.href);
                   }
@@ -107,7 +107,7 @@ export const Navbar = () => {
                     className="absolute bottom-0 left-0 right-0 h-[2px] bg-neon shadow-[0_0_8px_#CCFF00]"
                   />
                 )}
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -150,15 +150,14 @@ export const Navbar = () => {
                 Navigation
               </div>
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.label}
-                  href={link.href}
+                  to={link.href}
                   onClick={(e) => {
-                    if (link.href.startsWith('/tournament#')) {
+                    setMobileMenuOpen(false);
+                    if (link.href.startsWith('/tournament#') && location.pathname === '/tournament') {
                       e.preventDefault();
                       handleNavClick(link.href);
-                    } else {
-                      setMobileMenuOpen(false);
                     }
                   }}
                   className={`text-sm tracking-wider font-mono uppercase py-2 px-3 rounded flex items-center justify-between ${
@@ -169,7 +168,7 @@ export const Navbar = () => {
                 >
                   <span>{link.label}</span>
                   <span className="text-xs text-text-dim">→</span>
-                </a>
+                </Link>
               ))}
 
               <div className="pt-4 border-t border-border/50">

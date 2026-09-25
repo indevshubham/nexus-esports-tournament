@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && mkdir -p dist/tournament && cp dist/index.html dist/tournament/index.html",
     "preview": "vite preview",
     "test": "node test/storage.test.js && node test/tournament.test.js",
     "test:backend": "cd backend && npm test",
