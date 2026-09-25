@@ -65,19 +65,24 @@ export const Navbar = () => {
           {/* Brand Logo */}
           <Link
             to="/"
-            className="flex items-center gap-2.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-neon"
+            className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-neon"
             aria-label="NEXUS Home"
           >
-            <div className="relative flex items-center justify-center w-9 h-9 bg-surface-card border border-border group-hover:border-neon transition-colors duration-300 clip-tag">
-              <span className="text-neon font-mono font-bold text-lg leading-none">N</span>
-              <div className="absolute top-1 right-1 w-1.5 h-1.5 bg-neon rounded-full group-hover:scale-125 transition-transform" />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-display tracking-widest text-2xl font-bold text-white tracking-wider flex items-center gap-1.5 leading-none">
+            {/* Desktop & Tablet: Full Official Logo */}
+            <img
+              src="/nexus-logo.png"
+              alt="NEXUS Esports Tournament"
+              className="h-10 sm:h-11 w-auto max-w-[140px] object-contain hidden sm:block group-hover:scale-105 group-hover:brightness-110 transition-all duration-300"
+            />
+            {/* Mobile: Compact N Symbol & Brand */}
+            <div className="flex sm:hidden items-center gap-2">
+              <img
+                src="/nexus-mark.png"
+                alt="NEXUS"
+                className="h-8 w-8 object-contain group-hover:scale-105 transition-transform duration-300"
+              />
+              <span className="font-display text-xl font-bold tracking-wider text-white">
                 NEXUS
-              </span>
-              <span className="text-[9px] font-mono tracking-widest text-text-muted uppercase">
-                Championship // v1.0
               </span>
             </div>
           </Link>

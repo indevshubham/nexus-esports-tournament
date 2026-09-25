@@ -12,9 +12,11 @@ export const Footer = () => {
           {/* Brand Info */}
           <div className="md:col-span-6 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-surface-card border border-border flex items-center justify-center clip-tag">
-                <span className="text-neon font-mono font-bold text-base">N</span>
-              </div>
+              <img
+                src="/nexus-mark.png"
+                alt="NEXUS"
+                className="w-9 h-9 object-contain drop-shadow-[0_0_12px_rgba(204,255,0,0.25)]"
+              />
               <span className="font-display text-2xl font-bold tracking-wider text-white">
                 NEXUS
               </span>
