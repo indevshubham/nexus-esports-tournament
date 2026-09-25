@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
 import { Hero } from '../components/landing/Hero';
 import { HeroStats } from '../components/landing/HeroStats';
+import { TheArena } from '../components/landing/TheArena';
 import { HowItWorks } from '../components/landing/HowItWorks';
-import { TournamentIntro } from '../components/landing/TournamentIntro';
+import { TournamentStructure } from '../components/landing/TournamentStructure';
+import { LandingRosters } from '../components/landing/LandingRosters';
+import { LandingFixtures } from '../components/landing/LandingFixtures';
 import { CTA } from '../components/landing/CTA';
 
 export const Landing = () => {
@@ -11,11 +14,14 @@ export const Landing = () => {
   }, []);
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden bg-background">
       <Hero />
       <HeroStats />
+      <TheArena />
       <HowItWorks />
-      <TournamentIntro />
+      <TournamentStructure />
+      <LandingRosters />
+      <LandingFixtures />
       <CTA />
     </div>
   );

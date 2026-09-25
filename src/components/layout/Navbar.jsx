@@ -57,25 +57,25 @@ export const Navbar = () => {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-background/90 backdrop-blur-md border-b border-border/80 py-3 shadow-xl'
-            : 'bg-gradient-to-b from-background/90 via-background/40 to-transparent py-5'
+            ? 'bg-background/90 backdrop-blur-xl border-b border-white/[0.06] py-3.5 shadow-2xl shadow-black/80'
+            : 'bg-gradient-to-b from-background/95 via-background/60 to-transparent py-5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Brand Logo */}
           <Link
             to="/"
-            className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-neon"
+            className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-cyan"
             aria-label="NEXUS Home"
           >
             {/* Desktop & Tablet: Full Official Logo */}
             <img
               src="/nexus-logo.png"
               alt="NEXUS Esports Tournament"
-              className="h-10 sm:h-11 w-auto max-w-[140px] object-contain hidden sm:block group-hover:scale-105 group-hover:brightness-110 transition-all duration-300"
+              className="h-9 sm:h-10 w-auto max-w-[135px] object-contain hidden sm:block group-hover:scale-105 group-hover:brightness-110 transition-all duration-300"
             />
             {/* Mobile: Compact N Symbol & Brand */}
-            <div className="flex sm:hidden items-center gap-2">
+            <div className="flex sm:hidden items-center gap-2.5">
               <img
                 src="/nexus-mark.png"
                 alt="NEXUS"
@@ -88,7 +88,7 @@ export const Navbar = () => {
           </Link>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-8" aria-label="Main Navigation">
+          <nav className="hidden md:flex items-center gap-9" aria-label="Main Navigation">
             {navLinks.map((link) => (
               <Link
                 key={link.label}
@@ -99,9 +99,9 @@ export const Navbar = () => {
                     handleNavClick(link.href);
                   }
                 }}
-                className={`relative text-xs tracking-widest font-mono uppercase transition-colors duration-200 py-1 ${
+                className={`relative text-[11px] tracking-[0.2em] font-mono uppercase transition-colors duration-200 py-1 ${
                   isActive(link.href)
-                    ? 'text-neon font-semibold'
+                    ? 'text-accent-cyan font-semibold'
                     : 'text-text-muted hover:text-white'
                 }`}
               >
@@ -109,7 +109,7 @@ export const Navbar = () => {
                 {isActive(link.href) && (
                   <motion.div
                     layoutId="activeNavIndicator"
-                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-neon shadow-[0_0_8px_#CCFF00]"
+                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-accent-cyan shadow-[0_0_10px_#00F0FF]"
                   />
                 )}
               </Link>
@@ -120,9 +120,9 @@ export const Navbar = () => {
           <div className="hidden md:flex items-center gap-4">
             <Link
               to="/tournament"
-              className="relative inline-flex items-center gap-2 px-5 py-2.5 bg-neon text-black font-mono font-bold text-xs tracking-wider uppercase clip-corner-tr hover:bg-neon-hover transition-all duration-200 shadow-neon hover:shadow-neon-strong group"
+              className="relative inline-flex items-center gap-2 px-5 py-2.5 bg-accent-cyan text-black font-mono font-bold text-xs tracking-widest uppercase clip-corner-tr hover:bg-accent-cyan-hover transition-all duration-200 shadow-cyan hover:shadow-cyan-strong group"
             >
-              <span>ENTER TOURNAMENT</span>
+              <span>ENTER ARENA</span>
               <ArrowUpRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           </div>
@@ -131,7 +131,7 @@ export const Navbar = () => {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg bg-surface border border-border text-white hover:text-neon hover:border-neon transition-colors focus:outline-none focus:ring-2 focus:ring-neon"
+            className="md:hidden p-2 rounded bg-surface border border-white/10 text-white hover:text-accent-cyan hover:border-accent-cyan transition-colors focus:outline-none focus:ring-2 focus:ring-accent-cyan"
             aria-label="Toggle navigation menu"
             aria-expanded={mobileMenuOpen}
           >
@@ -180,9 +180,9 @@ export const Navbar = () => {
                 <Link
                   to="/tournament"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-neon text-black font-mono font-bold text-xs tracking-wider uppercase clip-corner-tr hover:bg-neon-hover transition-all"
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-accent-cyan text-black font-mono font-bold text-xs tracking-wider uppercase clip-corner-tr hover:bg-accent-cyan-hover transition-all shadow-cyan"
                 >
-                  <span>ENTER TOURNAMENT</span>
+                  <span>ENTER ARENA</span>
                   <ArrowUpRight className="w-4 h-4" />
                 </Link>
               </div>

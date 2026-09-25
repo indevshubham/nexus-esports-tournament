@@ -13,16 +13,16 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #08090D;
+  background: #050507;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1F2432;
-  border-radius: 3px;
+  background: #161D2B;
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #CCFF00;
+  background: #00F0FF;
 }
 
 /* Geometric clipped corner utility */
