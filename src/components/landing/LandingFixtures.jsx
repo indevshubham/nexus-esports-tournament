@@ -4,6 +4,16 @@ import { motion } from 'framer-motion';
 import { useTournament } from '../../context/TournamentContext';
 import { Swords, Lock, ArrowUpRight, Zap } from 'lucide-react';
 
+const getTeamName = (team, fallback = 'TBD') => {
+  if (!team) return fallback;
+  if (typeof team === 'string') return team;
+  if (typeof team === 'object') {
+    if (typeof team.name === 'string' && team.name.trim()) return team.name;
+    if (typeof team.teamName === 'string' && team.teamName.trim()) return team.teamName;
+  }
+  return fallback;
+};
+
 export const LandingFixtures = () => {
   const { teams, fixtures } = useTournament();
 
@@ -20,7 +30,7 @@ export const LandingFixtures = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-8 border-b border-white/10 gap-6">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-surface border border-white/10 text-accent-cyan font-mono text-[10px] tracking-[0.25em] uppercase mb-4 clip-corner-tl">
-              <Swords className="w-3 h-3 text-accent-cyan" />
+              <Swords className="w-3.5 h-3.5 text-accent-cyan" />
               <span>NEXUS // 06 · THE FIXTURES</span>
             </div>
             <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-white leading-none">
@@ -104,7 +114,7 @@ export const LandingFixtures = () => {
                     <div className="flex-1 text-left">
                       <div className="text-[10px] font-mono text-text-dim uppercase">HOME SQUAD</div>
                       <div className="font-mono text-base font-bold text-white uppercase truncate mt-0.5">
-                        {fixture.teamA?.name || fixture.team1?.name || fixture.teamA || fixture.team1 || 'TBD'}
+                        {getTeamName(fixture.teamA || fixture.team1, 'TBD')}
                       </div>
                     </div>
 
@@ -117,7 +127,7 @@ export const LandingFixtures = () => {
                     <div className="flex-1 text-right">
                       <div className="text-[10px] font-mono text-text-dim uppercase">AWAY SQUAD</div>
                       <div className="font-mono text-base font-bold text-white uppercase truncate mt-0.5">
-                        {fixture.teamB?.name || fixture.team2?.name || fixture.teamB || fixture.team2 || 'TBD'}
+                        {getTeamName(fixture.teamB || fixture.team2, 'TBD')}
                       </div>
                     </div>
                   </div>

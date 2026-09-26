@@ -1,4 +1,4 @@
-const rawBaseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+const rawBaseUrl = import.meta.env.VITE_API_URL || 'https://nexus-esports-tournament.onrender.com/api';
 // Normalize base URL: strip trailing slashes and ensure /api suffix
 const trimmedBase = rawBaseUrl.replace(/\/+$/, '');
 const API_BASE_URL = trimmedBase.endsWith('/api') ? trimmedBase : `${trimmedBase}/api`;

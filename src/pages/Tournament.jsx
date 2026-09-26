@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useTournament } from '../context/TournamentContext';
+import { ErrorBoundary } from '../components/common/ErrorBoundary';
 import { TournamentStats } from '../components/tournament/TournamentStats';
 import { TeamForm } from '../components/tournament/TeamForm';
 import { TeamCard } from '../components/tournament/TeamCard';
@@ -75,11 +76,15 @@ export const Tournament = () => {
         )}
 
         {/* Dynamic Tournament Metrics & Status */}
-        <TournamentStats onResetClick={() => setIsResetModalOpen(true)} />
+        <ErrorBoundary>
+          <TournamentStats onResetClick={() => setIsResetModalOpen(true)} />
+        </ErrorBoundary>
 
         {/* Create Squad Form */}
         <div ref={formRef} id="register" className="scroll-mt-28">
-          <TeamForm />
+          <ErrorBoundary>
+            <TeamForm />
+          </ErrorBoundary>
         </div>
 
         {/* Registered Teams Section */}
@@ -100,19 +105,23 @@ export const Tournament = () => {
           </div>
 
           {/* Teams Grid or Sophisticated Empty State */}
-          {teams.length === 0 ? (
-            <EmptyState onActionClick={handleScrollToForm} />
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {teams.map((team, index) => (
-                <TeamCard key={team._id || team.id} team={team} index={index} />
-              ))}
-            </div>
-          )}
+          <ErrorBoundary>
+            {teams.length === 0 ? (
+              <EmptyState onActionClick={handleScrollToForm} />
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {teams.map((team, index) => (
+                  <TeamCard key={team._id || team.id} team={team} index={index} />
+                ))}
+              </div>
+            )}
+          </ErrorBoundary>
         </section>
 
         {/* Tournament Fixtures Section */}
-        <FixtureSection />
+        <ErrorBoundary>
+          <FixtureSection />
+        </ErrorBoundary>
       </div>
 
       {/* Reset Confirmation Modal */}

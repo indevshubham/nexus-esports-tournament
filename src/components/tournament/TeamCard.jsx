@@ -90,10 +90,13 @@ export const TeamCard = ({ team, index }) => {
 
           {team.players?.map((player, pIdx) => {
             const playerNum = String(pIdx + 1).padStart(2, '0');
-            const playerName = typeof player === 'object' && player !== null ? player.name : player;
+            const playerName =
+              typeof player === 'object' && player !== null
+                ? player.name || player.playerName || `Operator ${playerNum}`
+                : player || `Operator ${playerNum}`;
             return (
               <div
-                key={player._id || player.id || pIdx}
+                key={player?._id || player?.id || pIdx}
                 className="flex items-center justify-between p-2.5 bg-surface-card border border-white/5 clip-corner-tl group-hover:border-white/10 transition-colors"
               >
                 <div className="flex items-center gap-2.5">

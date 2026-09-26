@@ -2,10 +2,20 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Swords, Clock, Shield } from 'lucide-react';
 
+const getTeamName = (team, fallback = 'SQUAD') => {
+  if (!team) return fallback;
+  if (typeof team === 'string') return team;
+  if (typeof team === 'object') {
+    if (typeof team.name === 'string' && team.name.trim()) return team.name;
+    if (typeof team.teamName === 'string' && team.teamName.trim()) return team.teamName;
+  }
+  return fallback;
+};
+
 export const FixtureCard = ({ match, index }) => {
   const matchNumStr = String(match.matchNumber || index + 1).padStart(2, '0');
-  const teamAName = match.teamA?.name || match.team1?.name || match.teamA || match.team1 || 'SQUAD A';
-  const teamBName = match.teamB?.name || match.team2?.name || match.teamB || match.team2 || 'SQUAD B';
+  const teamAName = getTeamName(match.teamA || match.team1, 'SQUAD A');
+  const teamBName = getTeamName(match.teamB || match.team2, 'SQUAD B');
 
   return (
     <motion.div

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { ErrorBoundary } from '../components/common/ErrorBoundary';
 import { Hero } from '../components/landing/Hero';
 import { HeroStats } from '../components/landing/HeroStats';
 import { TheArena } from '../components/landing/TheArena';
@@ -16,12 +17,18 @@ export const Landing = () => {
   return (
     <div className="relative overflow-hidden bg-background">
       <Hero />
-      <HeroStats />
+      <ErrorBoundary>
+        <HeroStats />
+      </ErrorBoundary>
       <TheArena />
       <HowItWorks />
       <TournamentStructure />
-      <LandingRosters />
-      <LandingFixtures />
+      <ErrorBoundary>
+        <LandingRosters />
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <LandingFixtures />
+      </ErrorBoundary>
       <CTA />
     </div>
   );

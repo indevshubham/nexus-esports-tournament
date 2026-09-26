@@ -110,15 +110,21 @@ export const LandingRosters = () => {
                     </span>
                     <div className="grid grid-cols-1 gap-1.5 font-mono text-xs">
                       {team.players && team.players.length > 0 ? (
-                        team.players.map((player, pIdx) => (
-                          <div
-                            key={pIdx}
-                            className="px-2.5 py-1.5 bg-surface-card border border-white/5 flex items-center justify-between text-text-muted hover:text-white"
-                          >
-                            <span className="text-[10px] text-text-dim font-bold">P{pIdx + 1}</span>
-                            <span className="font-semibold text-white/90">{player}</span>
-                          </div>
-                        ))
+                        team.players.map((player, pIdx) => {
+                          const playerName =
+                            typeof player === 'object' && player !== null
+                              ? player.name || player.playerName || `Operator ${pIdx + 1}`
+                              : player || `Operator ${pIdx + 1}`;
+                          return (
+                            <div
+                              key={player?._id || player?.id || pIdx}
+                              className="px-2.5 py-1.5 bg-surface-card border border-white/5 flex items-center justify-between text-text-muted hover:text-white"
+                            >
+                              <span className="text-[10px] text-text-dim font-bold">P{pIdx + 1}</span>
+                              <span className="font-semibold text-white/90">{playerName}</span>
+                            </div>
+                          );
+                        })
                       ) : (
                         <div className="text-xs text-text-dim italic font-sans py-1">
                           No players enrolled yet
@@ -130,7 +136,7 @@ export const LandingRosters = () => {
 
                 {/* Card Footer Telemetry */}
                 <div className="pt-4 border-t border-white/5 flex items-center justify-between font-mono text-[10px] text-text-dim">
-                  <span>ATLAS ID: {(team._id || team.id || '').substring(0, 8)}...</span>
+                  <span>ATLAS ID: {String(team._id || team.id || '').substring(0, 8)}...</span>
                   <span className="text-accent-cyan">VERIFIED 5v5</span>
                 </div>
               </motion.div>

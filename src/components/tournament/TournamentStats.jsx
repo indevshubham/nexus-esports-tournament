@@ -4,9 +4,11 @@ import { useTournament } from '../../context/TournamentContext';
 import { Users, Shield, Calendar, Activity, RotateCcw } from 'lucide-react';
 
 export const TournamentStats = ({ onResetClick }) => {
-  const { teams, fixtures, tournamentStatus } = useTournament();
+  const { teams = [], fixtures = [], tournamentStatus } = useTournament();
+  const safeTeams = Array.isArray(teams) ? teams : [];
+  const safeFixtures = Array.isArray(fixtures) ? fixtures : [];
 
-  const playerCount = teams.reduce((acc, team) => acc + (team.players?.length || 0), 0);
+  const playerCount = safeTeams.reduce((acc, team) => acc + (Array.isArray(team?.players) ? team.players.length : 0), 0);
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -45,7 +47,7 @@ export const TournamentStats = ({ onResetClick }) => {
             <span>{tournamentStatus}</span>
           </div>
 
-          {(teams.length > 0 || fixtures.length > 0) && (
+          {(safeTeams.length > 0 || safeFixtures.length > 0) && (
             <button
               type="button"
               onClick={onResetClick}
@@ -63,7 +65,7 @@ export const TournamentStats = ({ onResetClick }) => {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-6">
         {/* Teams Metric */}
         <motion.div
-          key={teams.length}
+          key={safeTeams.length}
           initial={{ scale: 0.96 }}
           animate={{ scale: 1 }}
           className="p-4 bg-surface-card/70 border border-white/10 hover:border-accent-cyan/40 clip-corner-tr relative group transition-colors"
@@ -74,14 +76,14 @@ export const TournamentStats = ({ onResetClick }) => {
           </div>
           <div className="flex items-baseline gap-1">
             <span className="font-display text-4xl sm:text-5xl font-bold text-white tracking-tight">
-              {String(teams.length).padStart(2, '0')}
+              {String(safeTeams.length).padStart(2, '0')}
             </span>
             <span className="font-mono text-sm text-text-dim">/ 05</span>
           </div>
           <div className="w-full bg-white/5 h-1 mt-3 overflow-hidden">
             <div
               className="bg-accent-cyan h-full transition-all duration-500 shadow-cyan"
-              style={{ width: `${(teams.length / 5) * 100}%` }}
+              style={{ width: `${(safeTeams.length / 5) * 100}%` }}
             />
           </div>
         </motion.div>
@@ -113,7 +115,7 @@ export const TournamentStats = ({ onResetClick }) => {
 
         {/* Fixtures Metric */}
         <motion.div
-          key={fixtures.length}
+          key={safeFixtures.length}
           initial={{ scale: 0.96 }}
           animate={{ scale: 1 }}
           className="p-4 bg-surface-card/70 border border-white/10 hover:border-accent-cyan/40 clip-corner-tr relative group transition-colors"
@@ -124,14 +126,14 @@ export const TournamentStats = ({ onResetClick }) => {
           </div>
           <div className="flex items-baseline gap-1">
             <span className="font-display text-4xl sm:text-5xl font-bold text-white tracking-tight">
-              {String(fixtures.length).padStart(2, '0')}
+              {String(safeFixtures.length).padStart(2, '0')}
             </span>
             <span className="font-mono text-sm text-text-dim">/ 10</span>
           </div>
           <div className="w-full bg-white/5 h-1 mt-3 overflow-hidden">
             <div
               className="bg-accent-cyan h-full transition-all duration-500 shadow-cyan"
-              style={{ width: `${(fixtures.length / 10) * 100}%` }}
+              style={{ width: `${(safeFixtures.length / 10) * 100}%` }}
             />
           </div>
         </motion.div>
@@ -146,7 +148,7 @@ export const TournamentStats = ({ onResetClick }) => {
             {tournamentStatus}
           </div>
           <div className="text-[10px] font-mono text-text-dim uppercase mt-2">
-            {teams.length === 5 ? (fixtures.length === 10 ? 'Ready for combat' : 'Ready to generate') : `${5 - teams.length} slots remaining`}
+            {safeTeams.length === 5 ? (safeFixtures.length === 10 ? 'Ready for combat' : 'Ready to generate') : `${5 - safeTeams.length} slots remaining`}
           </div>
         </div>
       </div>

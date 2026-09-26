@@ -4,15 +4,20 @@ import { useTournament } from '../../context/TournamentContext';
 import { Database, ShieldCheck, Users, Swords } from 'lucide-react';
 
 export const HeroStats = () => {
-  const { teams, fixtures, serverError } = useTournament();
+  const { teams = [], fixtures = [], serverError } = useTournament();
+  const safeTeams = Array.isArray(teams) ? teams : [];
+  const safeFixtures = Array.isArray(fixtures) ? fixtures : [];
 
-  const totalPlayers = teams.reduce((acc, team) => acc + (team.players?.length || 0), 0);
+  const totalPlayers = safeTeams.reduce(
+    (acc, team) => acc + (Array.isArray(team?.players) ? team.players.length : 0),
+    0
+  );
 
   const statsData = [
     {
-      value: `${teams.length} / 05`,
+      value: `${safeTeams.length} / 05`,
       label: 'CONFIRMED SQUADS',
-      detail: teams.length === 5 ? 'CAPACITY REACHED' : `${5 - teams.length} SLOTS REMAINING`,
+      detail: safeTeams.length === 5 ? 'CAPACITY REACHED' : `${5 - safeTeams.length} SLOTS REMAINING`,
       icon: ShieldCheck,
       accent: 'text-accent-cyan border-accent-cyan',
     },
@@ -24,9 +29,9 @@ export const HeroStats = () => {
       accent: 'text-accent-violet border-accent-violet',
     },
     {
-      value: `${fixtures.length} / 10`,
+      value: `${safeFixtures.length} / 10`,
       label: 'FIXTURE PAIRINGS',
-      detail: fixtures.length === 10 ? 'CLOSED MATCH SCHEDULE' : 'UNLOCKED AT 5 SQUADS',
+      detail: safeFixtures.length === 10 ? 'CLOSED MATCH SCHEDULE' : 'UNLOCKED AT 5 SQUADS',
       icon: Swords,
       accent: 'text-accent-cyan border-accent-cyan',
     },
